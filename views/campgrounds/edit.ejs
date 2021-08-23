@@ -1,50 +1,75 @@
 <% layout('layouts/boilerplate') %>
-<form action="/campgrounds/<%=camp._id%>?_method=PUT" method="POST">
-    <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="campground[title]" value="<%= camp.title %>">
-    </div>
-    <div>
-        <label for="location">Location</label>
-        <input type="text" id="location" name="campground[location]" value="<%= camp.location %>">
-    </div>
-    <button>Change Campground</button>
-</form>
-<footer>
-    <a href="/campgrounds/<%= camp._id %> ">Back to Campground</a>
-</footer>
 
 <div class="row">
     <h1 class="text-center">Edit Campground</h1>
     <div class="col-6 offset-3">
-        <form action="/campgrounds/<%=camp._id%>?_method=PUT" method="POST"></form>
+        <form action="/campgrounds/<%=camp._id%>?_method=PUT" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="campground[title]" value="<%= camp.title %>">
+                <input class="form-control" type="text" id="title" name="campground[title]" value="<%= camp.title %>" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="location">Location</label>
-                <input class="form-control" type="text" id="location" name="campground[location]" value="<%= camp.location %>">
+                <input class="form-control" type="text" id="location" name="campground[location]" value="<%= camp.location %>" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea class="form-control" type="text" id="description" name="campground[description]"><%= camp.description %> </textarea>
+                <textarea class="form-control" type="text" id="description" name="campground[description]" required><%= camp.description %> </textarea>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="image">Image Url</label>
-                <input class="form-control" type="text" id="image" name="campground[image]" value="<%= camp.image %>"">
+                <input class="form-control" type="text" id="image" name="campground[image]" value="<%= camp.image %>" required>
+                <div class="valid-feedback">
+                    Looks good
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="price">Campground Price</label>
                 <div class="input-group">
                     <span class="input-group-text" id="price-label">€</span>
-                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-describedby="price-label" name="campground[price]" value="<%= camp.price %>">
+                    <input type="text" class="form-control" id="price" placeholder="0.00" aria-describedby="price-label" name="campground[price]" value="<%= camp.price %>" required>
+                    <div class="valid-feedback">
+                        Looks good
+                    </div>
                 </div>
             </div>
             <div class="mb-3">
-                <button class="btn btn-info">Save Campground</button>
+                <button class="btn btn-info">Change Campground</button>
             </div>
-            <a href="/campgrounds/<%= camp._id %> ">Back to Campground</a>
+            
         </form>
+        <a href="/campgrounds/<%= camp._id %> ">Back to Campground</a>
     </div>
 </div>
+
+<script>
+    (function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+</script>
